@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shift Schedule Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Generate Shift Schedule</h1>
+    <form id="scheduleForm" method="POST" action="/generate">
+        <div class="form-group">
+            <label for="month">Month:</label>
+            <select id="month" name="month">
+                {% for m in range(1, 13) %}
+                <option value="{{ m }}" {% if m == current_month %}selected{% endif %}>
+                    {{ month_name[m] }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year" value="{{ current_year }}" min="1900" max="2100">
+        </div>
+        <button type="submit">Generate Schedule</button>
+    </form>
+    <div id="status"></div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
